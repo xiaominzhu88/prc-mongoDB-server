@@ -1,68 +1,40 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+docker
+docker-compose
 
-## Available Scripts
+- Robo 3T create database
+  proxy 中间代理机构，请求数据 package.json localhost 定义 server 在哪里工作
 
-In the project directory, you can run:
+# -------------APP 运行 过程---------------
 
-### `yarn start`
+## 第一个 button 是 insert 'Lola' 信息到 mongo, 同时 显示在前端 APP
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 1: index.js
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- 连接到 mongodb，如果是 200 status，显示 connected
+- 写入 object 到 mongodb， insertOne, log 出 mongo response
+- 用 send 的方法 发送这个 mongo response 去 前端 App.js
 
-### `yarn test`
+### 2: App.js
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 第一个 fetch 就是 get method， 得到 index 发送过来的 mongo response data
+- 用 setData 展示要显示的 data
 
-### `yarn build`
+（robo 3T 里可以看到此加入信息， 每次 click 就加入一条）
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# 第二个 button 是 update mongo 里的‘Lola’ 名字
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### 1: App.js
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 先 input 写入 要更改的信息， 加个 button submit 更改
 
-### `yarn eject`
+- 第二个 fetch 是 post method，body 里面是要更改的 name 信息，发送这个 request 去 server
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 2: index.js
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- 用 app.post 方法， 先得到 前端发来的 request 信息 req.body
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- 连接到 mongoDB, 用 updateOne 方法更改 name 是'Lola' 的信息
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- 所更改的内容就是 前端发来的 request 信息 req.body.name
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+（robo 3T 里可以看到此更新的信息， 每次 click 就更新一条）

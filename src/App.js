@@ -1,24 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [data, setData] = useState({});
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
+
+  const getAndInsertMongoData = () => {
+    fetch("/message")
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("res: ", res); // name, age, _id
+        setData(res.ops);
+      })
+      .catch((e) => console.log("error,", e));
+  };
+
+  const update = async () => {
+    const result = await fetch("/message", {
+      method: "post",
+      body: JSON.stringify({ name, age }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        console.log("RES: ", res);
+      })
+
+      .catch((e) => console.log("error,", e));
+    return result;
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <button onClick={getAndInsertMongoData}>Click me first!</button>
+        <p>Insert to mongoDB: {JSON.stringify(data)}</p>
+      </div>
+      <div>
+        <input
+          placeholder="enter name"
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+      <div>
+        <input
+          placeholder="enter age"
+          onChange={(e) => setAge(e.target.value)}
+        />
+        <button onClick={update}>update </button>
+      </div>
     </div>
   );
 }
