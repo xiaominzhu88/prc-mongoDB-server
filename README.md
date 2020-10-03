@@ -78,3 +78,15 @@ volumes:
 3. add express, body-parser, nodemon, mongodb
 
 在 package.json 增加 server-start, 用来启用 nodemon server
+
+📸
+
+| Learn            | Note                                             |
+| ---------------- | ------------------------------------------------ |
+| Dockerfile       | https://hub.docker.com/                          |
+| docker-compose   | docker-compose up                                |
+| Robo 3T          | https://robomongo.org/                           |
+| Proxy            | https://baike.baidu.com/item/proxy               |
+| _ Cors _         | 跨域访问，要返回信息 可以用 proxy 解决           |
+|                  | https://www.cnblogs.com/loveis715/p/4592246.html |
+| _ Concurrently _ | https://www.npmjs.com/package/concurrently       |
