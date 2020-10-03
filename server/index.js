@@ -9,7 +9,7 @@ const MONGO_URI = "mongodb://127.0.0.1:27017/prc";
 const WRITECONCERN = { w: 1, wtimeout: 2000 };
 
 const client = new MongoClient(MONGO_URI, { useUnifiedTopology: true });
-app.get("/message", (req, res) => {
+app.get("/info", (req, res) => {
   client.connect((err, db) => {
     db.db("prc")
       .collection("test1")
@@ -37,7 +37,7 @@ app.get("/message", (req, res) => {
   });
 });
 
-app.post("/message", (req, res) => {
+app.post("/info", (req, res) => {
   console.log("index-REQ-body: ", req.body);
   client.connect((err, db) => {
     const update = { $set: { name: req.body.name, age: req.body.age } };

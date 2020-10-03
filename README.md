@@ -1,10 +1,4 @@
-docker
-docker-compose
-
-- Robo 3T create database
-  proxy 中间代理机构，请求数据 package.json localhost 定义 server 在哪里工作
-
-# -------------APP 运行 过程---------------
+# APP 运行 过程 ⌛️
 
 ## 第一个 button 是 insert 'Lola' 信息到 mongo, 同时 显示在前端 APP
 
@@ -21,7 +15,7 @@ docker-compose
 
 （robo 3T 里可以看到此加入信息， 每次 click 就加入一条）
 
-# 第二个 button 是 update mongo 里的‘Lola’ 名字
+## 第二个 button 是 update mongo 里的‘Lola’ 名字
 
 ### 1: App.js
 
@@ -38,3 +32,49 @@ docker-compose
 - 所更改的内容就是 前端发来的 request 信息 req.body.name
 
 （robo 3T 里可以看到此更新的信息， 每次 click 就更新一条）
+
+## 所需东东
+
+1. 复制这两个到 root
+
+[https://hub.docker.com/](https://hub.docker.com/)
+
+## Dockerfile
+
+```jsx
+FROM mongo:3.6.8
+CMD mongod --fork --logpath /var/log/mongodb.log; \
+  mongorestore /tmp/dump/; \
+  mongod --shutdown; \
+  docker-entrypoint.sh mongod
+```
+
+## docker-compose.yml
+
+```jsx
+version: "3.7"
+services:
+  mongodb_container:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+
+volumes:
+  mongodb_data_container:
+```
+
+### docker
+
+### docker-compose up 启动
+
+-[ ] Robo 3T create database （ Collections /test1 )
+
+2. npx create-react-app prc 打开 新项目
+
+-[ ] proxy 中间代理机构，可以确保请求到数据 这条指令只需要在 package.json localhost 定义 server 在哪里工作, 因为 cors 的原因
+
+3. add express, body-parser, nodemon, mongodb
+
+在 package.json 增加 server-start, 用来启用 nodemon server

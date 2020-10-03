@@ -6,8 +6,8 @@ function App() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
 
-  const getAndInsertMongoData = () => {
-    fetch("/message")
+  const getAndInsertMongoData = async () => {
+    await fetch("/info")
       .then((res) => res.json())
       .then((res) => {
         console.log("res: ", res); // name, age, _id
@@ -17,7 +17,7 @@ function App() {
   };
 
   const update = async () => {
-    const result = await fetch("/message", {
+    const result = await fetch("/info", {
       method: "post",
       body: JSON.stringify({ name, age }),
       headers: {
