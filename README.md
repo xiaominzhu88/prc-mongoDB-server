@@ -69,11 +69,11 @@ volumes:
 
 ### docker-compose up 启动
 
--[ ] Robo 3T create database （ Collections /test1 )
+- [ ] Robo 3T create database （ Collections /test1 )
 
 2. npx create-react-app prc 打开 新项目
 
--[ ] proxy 中间代理机构，可以确保请求到数据 这条指令只需要在 package.json localhost 定义 server 在哪里工作, 因为 cors 的原因
+- [ ] proxy 中间代理机构，可以确保请求到数据 这条指令只需要在 package.json localhost 定义 server 在哪里工作, 因为 cors 的原因
 
 3. add express, body-parser, nodemon, mongodb
 
