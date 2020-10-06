@@ -9,6 +9,7 @@ const MONGO_URI = "mongodb://127.0.0.1:27017/prc";
 const WRITECONCERN = { w: 1, wtimeout: 2000 };
 
 const client = new MongoClient(MONGO_URI, { useUnifiedTopology: true });
+
 app.get("/info", (req, res) => {
   client.connect((err, db) => {
     db.db("prc")
@@ -23,16 +24,15 @@ app.get("/info", (req, res) => {
       .then((mongoResponse) => {
         console.log("mongo-response: ", mongoResponse);
         res.status(200);
-        return res.send({
+        res.send({
           ops: mongoResponse.ops,
         });
-      });
-    if (err) {
-      console.log("mongo error: ", err);
-      res.status(500);
+      })
+      .catch((err) => {
+        console.log("mongo error: ", err);
 
-      throw err;
-    }
+        throw new Error(err.message);
+      });
     console.log("connected to mongoDB!");
   });
 });
@@ -56,6 +56,34 @@ app.post("/info", (req, res) => {
           }
         }
       );
+  });
+});
+
+app.post("/posts", (req, res) => {
+  console.log("REQ_BODY: ", req.body);
+
+  client.connect((err, db) => {
+    db.db("prc")
+      .collection("content")
+      .insertOne(
+        {
+          title: req.body.title,
+          text: req.body.text,
+        },
+        WRITECONCERN
+      )
+      .then((contentResponse) => {
+        console.log("content-response: ", contentResponse.ops);
+        res.status(200);
+        res.send({
+          ops: contentResponse.ops,
+        });
+      })
+      .catch((err) => {
+        console.log("mongo error: ", err);
+        throw new Error(err.message);
+      });
+    console.log("connected!");
   });
 });
 

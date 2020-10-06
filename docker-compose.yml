@@ -1,5 +1,5 @@
 version: "3.7"
-services:
+services: # 一个应用的容器，可以包括若干运行相同image的容器实例,项目标配，可以多容器
   mongodb_container:
     image: mongo:latest
     ports:
@@ -14,5 +14,5 @@ volumes:
 # Registry： 仓库 （背包），管理image， Docker Hub,提供image上传下载浏览等功能，提供账号管理 http://hub.Docker.com
 # Container： 容器 （用魔法造好的房子）,跑项目程序，提供服务
 
-# service: 一个应用的容器，可以包括若干运行相同image的容器实例
-# project: 由一组关联的容器组成的一个完整业务单元，  docker-compose.yml
+# project: 由一组关联的容器组成的一个完整业务单元,是compose默认管理对象，通过子命令对项目中的容器管理
+#  docker-compose.yml 是compose的模版文件

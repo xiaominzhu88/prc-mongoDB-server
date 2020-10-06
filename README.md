@@ -69,6 +69,8 @@ volumes:
 
 ### docker-compose up 启动
 
+[https://developer.aliyun.com/article/714944?spm=a2c6h.14164896.0.0.1c745859v8aefB](https://developer.aliyun.com/article/714944?spm=a2c6h.14164896.0.0.1c745859v8aefB)
+
 - [ ] Robo 3T create database （ Collections /test1 )
 
 2. npx create-react-app prc 打开 新项目
@@ -90,3 +92,19 @@ volumes:
 | _ Cors _         | 跨域访问，要返回信息 可以用 proxy 解决           |
 |                  | https://www.cnblogs.com/loveis715/p/4592246.html |
 | _ Concurrently _ | https://www.npmjs.com/package/concurrently       |
+
+### Dockerfile 语法
+
+| mingling   | Note                                                                 |
+| ---------- | -------------------------------------------------------------------- |
+| FROM       | 基于哪个镜像（image）来实现                                          |
+| MAINTAINER | 镜像 （image) 创建者                                                 |
+| ENV        | 声明环境变量                                                         |
+| RUN        | 执行的命令                                                           |
+| ADD        | 添加宿主机文件到容器里，有需要解压的文件会自动解压                   |
+| COPY       | 添加宿主机文件到容器里                                               |
+| WORKDIR    | 工作目录                                                             |
+| EXPOSE     | 容器内应用可使用的端口                                               |
+| CMD        | 容器启动后所执行的程序，如果执行 docker run 后面跟启动命令会被覆盖掉 |
+| ENTRYPOINT | 同 CMD,不会覆盖                                                      |
+| VOLUME     | 将宿主机的目录挂在到容器里                                           |
