@@ -18,7 +18,7 @@ const Main = ({ getAndInsertMongoData, data, setName, setAge, update }) => {
           placeholder="enter age"
           onChange={(e) => setAge(e.target.value)}
         />
-        <button onClick={update}>update </button>
+        <button onClick={update}>update DB</button>
       </div>
     </div>
   );

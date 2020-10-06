@@ -1,6 +1,5 @@
 import React from "react";
 import Content from "./Content.js";
-import Info from "./Info.js";
 
 const Insert = ({
   title,
@@ -13,10 +12,20 @@ const Insert = ({
   return (
     <div>
       <form id="postData">
-        <input onChange={changeTitle} value={title} type="text" />
-        <input onChange={changeText} value={text} type="text" />
+        <input
+          onChange={changeTitle}
+          value={title}
+          type="text"
+          placeholder="title"
+        />
+        <input
+          onChange={changeText}
+          value={text}
+          type="text"
+          placeholder="text"
+        />
 
-        <button onClick={sendData}>Send</button>
+        <button onClick={sendData}>Save to DB</button>
       </form>
 
       <div>

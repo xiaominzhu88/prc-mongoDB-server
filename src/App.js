@@ -13,11 +13,12 @@ function App() {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
 
+  // Main page
+  // get inserted constant data from server
   const getAndInsertMongoData = async () => {
     await fetch("/info")
       .then((res) => res.json())
       .then((res) => {
-        console.log("res: ", res);
         setData(res.ops);
       })
       .catch((e) => console.log("error,", e));
@@ -25,15 +26,17 @@ function App() {
 
   const update = async () => {
     const result = await fetch("/info", {
-      method: "post",
-      body: JSON.stringify({ name, age }),
+      method: "POST",
+      body: JSON.stringify({ name, age }), // send input value with 'name and age' to server
       headers: {
         "Content-Type": "application/json",
       },
     })
       .then((res) => {
-        console.log("RES: ", res);
+        // get updated value from server (res.send())
+        return res.json();
       })
+      .then((data) => console.log("response-data: ", data))
 
       .catch((e) => console.log("error,", e));
     return result;
@@ -45,14 +48,14 @@ function App() {
     e.preventDefault();
     const resultData = await fetch("/posts", {
       method: "POST",
-      body: JSON.stringify({ title, text }),
+      body: JSON.stringify({ title, text }), // post input value to server,
       headers: {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => res.json())
+      .then((res) => res.json()) // get response back as content (DB use insertOne) with '_id' created from mongo
       .then((data) => {
-        setContent([...data.ops, ...content]);
+        setContent([...data.ops, ...content]); // render all content
         setTitle("");
         setText("");
       })
