@@ -1,5 +1,11 @@
 # APP 运行 过程 ⌛️
 
+This is a simple App using react, mongoDB database, NodeJs with express, docker/docker-compose, it contains 2 pages
+
+### first Page: User can view the initial value from mongoDB, and enter text as input and update them in mongoDB
+
+### second Page: User can enter input with title and text and send them to server-> mongoDB, and view the response from database which also contains mongoDB id
+
 # Main.js
 
 ## 第一个 button 是 insert 'Lola' 信息到 mongo, 同时 显示在前端 APP
