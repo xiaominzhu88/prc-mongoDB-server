@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import {
-  Switch,
-  BrowserRouter as Router,
-  Route,
-  Link,
-  useHistory,
-  Redirect,
-} from "react-router-dom";
+import { Switch, BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Insert from "./components/Insert.js";
 import Main from "./components/Main.js";
 
@@ -19,11 +12,6 @@ function App() {
   const [content, setContent] = useState([]);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-
-  // const [content, setContent] = useState({
-  //   title: "",
-  //   text: "",
-  // });
 
   const getAndInsertMongoData = async () => {
     await fetch("/info")
@@ -73,16 +61,6 @@ function App() {
     return resultData;
   };
 
-  function showData(i) {
-    console.log("content: ", content);
-    const ID = content.map((el) => el._id);
-
-    const id = ID.splice(i, 1);
-    console.log("each-id: ", id);
-
-    // return <Redirect to={`/posts/${id}`} />;
-  }
-
   return (
     <Router>
       <div className="App">
@@ -113,7 +91,6 @@ function App() {
               text={text}
               changeTitle={(e) => setTitle(e.target.value)}
               changeText={(e) => setText(e.target.value)}
-              showData={showData}
               content={content}
               sendData={sendData}
             />

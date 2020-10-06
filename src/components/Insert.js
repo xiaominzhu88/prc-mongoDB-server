@@ -1,13 +1,12 @@
 import React from "react";
-//import {Route} from 'react-router-dom'
+import Content from "./Content.js";
+import Info from "./Info.js";
 
 const Insert = ({
   title,
   text,
   changeTitle,
   changeText,
-  showData,
-
   content,
   sendData,
 }) => {
@@ -20,16 +19,8 @@ const Insert = ({
         <button onClick={sendData}>Send</button>
       </form>
 
-      <div onClick={(index) => showData(index)}>
-        <ul>
-          {content.map((item, i) => {
-            return (
-              <li key={i}>
-                Title: {item.title} Text: {item.text} -- {item._id}
-              </li>
-            );
-          })}
-        </ul>
+      <div>
+        <Content content={content} />
       </div>
     </div>
   );
