@@ -1,5 +1,7 @@
 # APP 运行 过程 ⌛️
 
+# Main.js
+
 ## 第一个 button 是 insert 'Lola' 信息到 mongo, 同时 显示在前端 APP
 
 ### 1: index.js
@@ -33,13 +35,25 @@
 
 （robo 3T 里可以看到此更新的信息， 每次 click 就更新一条）
 
+# Insert.js
+
+## 里面有两个 Component (Content / Info)
+
+1. 首先 把 input 用 post 方法发送到 server， 'posts' 是 Path, button save to DB
+
+2. 在 server 首先用 App.post（）接收到发来的 input 信息，连接 mongoDB
+
+3. 把接收到的 信息 用 insertOne 方法发送到 mongoDB, 然后 接收 mongoDB 发回的 信息， 用 res.send() 方法 发送回 前端， 里面有 包含 '\_id'
+
+4. 前端 用 res.json() 方法接收 server 发回的信息， 然后 render
+
 ## 所需东东
 
 1. 复制这两个到 root
 
 [https://hub.docker.com/](https://hub.docker.com/)
 
-## Dockerfile
+### Dockerfile
 
 ```jsx
 FROM mongo:3.6.8
@@ -49,7 +63,7 @@ CMD mongod --fork --logpath /var/log/mongodb.log; \
   docker-entrypoint.sh mongod
 ```
 
-## docker-compose.yml
+### docker-compose.yml
 
 ```jsx
 version: "3.7"
@@ -77,7 +91,7 @@ volumes:
 
 - [ ] proxy 中间代理机构，可以确保请求到数据 这条指令只需要在 package.json localhost 定义 server 在哪里工作, 因为 cors 的原因
 
-3. add express, body-parser, nodemon, mongodb
+3. 后端 add express, body-parser, nodemon, mongodb
 
 在 package.json 增加 server-start, 用来启用 nodemon server
 
@@ -108,3 +122,5 @@ volumes:
 | CMD        | 容器启动后所执行的程序，如果执行 docker run 后面跟启动命令会被覆盖掉 |
 | ENTRYPOINT | 同 CMD,不会覆盖                                                      |
 | VOLUME     | 将宿主机的目录挂在到容器里                                           |
+
+4. 前端 import from react-router-dom
